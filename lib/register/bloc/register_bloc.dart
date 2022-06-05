@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todos/input/email_input.dart';
 import 'package:flutter_todos/input/password_input.dart';
@@ -75,14 +74,12 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     ));
 
     try {
-      final userCredentials =
-          await _authenticationRepository.registerUserWithEmailAndPassword(
+      await _authenticationRepository.registerUserWithEmailAndPassword(
         event.email,
         event.password,
       );
 
       emit(RegisterSuccess(
-        userCredentials: userCredentials,
         emailInput: currentState.emailInput,
         passwordInput: currentState.passwordInput,
         confirmPasswordInput: currentState.confirmPasswordInput,

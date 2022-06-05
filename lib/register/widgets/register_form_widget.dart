@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todos/input/email_input.dart';
 import 'package:flutter_todos/input/password_input.dart';
 import 'package:flutter_todos/register/bloc/register_bloc.dart';
+import 'package:flutter_todos/widgets/height_spacing_widget.dart';
 
 class RegisterForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -58,7 +59,6 @@ class RegisterForm extends StatelessWidget {
     return Form(
       key: formKey,
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
           BlocSelector<RegisterBloc, RegisterState, EmailInput>(
             selector: (state) => state.emailInput,
@@ -75,7 +75,7 @@ class RegisterForm extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 16),
+          const HeightSpacing.md(),
           BlocSelector<RegisterBloc, RegisterState, List<PasswordInput>>(
             selector: (state) =>
                 [state.passwordInput, state.confirmPasswordInput],
@@ -107,7 +107,7 @@ class RegisterForm extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 16),
+          const HeightSpacing.md(),
           BlocSelector<RegisterBloc, RegisterState, List<PasswordInput>>(
             selector: (state) =>
                 [state.passwordInput, state.confirmPasswordInput],

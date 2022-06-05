@@ -1,5 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todos/register/register_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todos/constants/spacing.dart';
+import 'package:flutter_todos/login/bloc/login_bloc.dart';
+import 'package:flutter_todos/login/widgets/login_button_widget.dart';
+import 'package:flutter_todos/login/widgets/login_form_widget.dart';
+import 'package:flutter_todos/login/widgets/login_header_widget.dart';
+import 'package:flutter_todos/login/widgets/login_register_option_widget.dart';
+import 'package:flutter_todos/repositories/authentication_repository.dart';
+import 'package:flutter_todos/todos/todos_page.dart';
+import 'package:flutter_todos/utilities/snack_bar_helper.dart';
+import 'package:flutter_todos/widgets/height_spacing_widget.dart';
 
 class LoginPage extends StatelessWidget {
   static Route route() {
@@ -12,89 +22,84 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const LoginView();
+    return BlocProvider(
+      create: (context) => LoginBloc(
+        authenticationRepository: context.read<AuthenticationRepository>(),
+      ),
+      child: LoginView(),
+    );
   }
 }
 
 class LoginView extends StatelessWidget {
-  const LoginView({Key? key}) : super(key: key);
+  late final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  LoginView({Key? key}) : super(key: key);
+
+  void onLoginSuccess(BuildContext context) {
+    Navigator.of(context).pushReplacement(TodosPage.route());
+  }
+
+  void onLoginFailure(BuildContext context, String error) {
+    SnackBarHelper.showSnackBar(
+      context: context,
+      message: error,
+      snackBarType: SnackBarType.error,
+    );
+  }
+
+  void onLoginPressed(BuildContext context) {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
+    final currentState = context.read<LoginBloc>().state.copyWith();
+
+    final emailInput = currentState.emailInput;
+    final passwordInput = currentState.passwordInput;
+
+    context.read<LoginBloc>().add(
+          LoginButtonPressed(
+            email: emailInput.value,
+            password: passwordInput.value,
+          ),
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Login'),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Let\'s sign you in.',
-                textAlign: TextAlign.start,
-                style: Theme.of(context).textTheme.headline4,
-              ),
-              Form(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
+    return BlocListener<LoginBloc, LoginState>(
+      listener: (context, state) {
+        if (state is LoginSuccess) {
+          onLoginSuccess(context);
+        }
+
+        if (state is LoginFailure) {
+          onLoginFailure(context, state.error.toString());
+        }
+      },
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Login'),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(kSpacingMedium),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const LoginHeader(),
+                LoginForm(formKey: _formKey, onLoginPressed: onLoginPressed),
+                Column(
                   children: [
-                    TextFormField(
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                        prefixIcon: Icon(Icons.email_outlined),
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        labelText: 'Password',
-                        prefixIcon: Icon(Icons.lock_outline),
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
+                    const LoginRegisterOption(),
+                    const HeightSpacing.md(),
+                    LoginButton(onLoginPressed: onLoginPressed),
                   ],
                 ),
-              ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text('Don\'t have an account? '),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            RegisterPage.route(),
-                          );
-                        },
-                        child: const Text(
-                          'Register',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(48.0),
-                    ),
-                    child: const Text('Sign In'),
-                  )
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

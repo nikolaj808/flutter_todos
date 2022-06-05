@@ -1,5 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todos/blocs/user/user_bloc.dart';
 import 'package:flutter_todos/login/login_page.dart';
 import 'package:flutter_todos/todos/todos_page.dart';
 
@@ -12,36 +13,33 @@ class SplashPage extends StatelessWidget {
   }
 }
 
-class SplashView extends StatefulWidget {
+class SplashView extends StatelessWidget {
   const SplashView({Key? key}) : super(key: key);
 
-  @override
-  State<SplashView> createState() => _SplashViewState();
-}
+  void onUserAuthenticated(BuildContext context) {
+    Navigator.of(context).pushReplacement(TodosPage.route());
+  }
 
-class _SplashViewState extends State<SplashView> {
-  @override
-  void initState() {
-    super.initState();
-
-    FirebaseAuth.instance.authStateChanges().first.then((user) {
-      if (user == null) {
-        Navigator.of(context).pushReplacement(
-          LoginPage.route(),
-        );
-      } else {
-        Navigator.of(context).pushReplacement(
-          TodosPage.route(),
-        );
-      }
-    });
+  void onUserNotAuthenticated(BuildContext context) {
+    Navigator.of(context).pushReplacement(LoginPage.route());
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(),
+    return BlocListener<UserBloc, UserState>(
+      listener: (context, state) {
+        if (state is UserAuthenticated) {
+          onUserAuthenticated(context);
+        }
+
+        if (state is UserNotAuthenticated) {
+          onUserNotAuthenticated(context);
+        }
+      },
+      child: const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
     );
   }

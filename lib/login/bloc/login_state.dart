@@ -1,47 +1,40 @@
-part of 'register_bloc.dart';
+part of 'login_bloc.dart';
 
-abstract class RegisterState extends Equatable {
+abstract class LoginState extends Equatable {
   final EmailInput emailInput;
   final PasswordInput passwordInput;
-  final PasswordInput confirmPasswordInput;
 
-  const RegisterState({
+  const LoginState({
     required this.emailInput,
     required this.passwordInput,
-    required this.confirmPasswordInput,
   });
 
-  RegisterState copyWith({
+  LoginState copyWith({
     EmailInput? emailInput,
     PasswordInput? passwordInput,
-    PasswordInput? confirmPasswordInput,
   });
 
   @override
   List<Object> get props => [
         emailInput.value,
         passwordInput.value,
-        confirmPasswordInput.value,
       ];
 }
 
-class RegisterInitial extends RegisterState {
-  const RegisterInitial({
+class LoginInitial extends LoginState {
+  const LoginInitial({
     required super.emailInput,
     required super.passwordInput,
-    required super.confirmPasswordInput,
   });
 
   @override
-  RegisterInitial copyWith({
+  LoginInitial copyWith({
     EmailInput? emailInput,
     PasswordInput? passwordInput,
-    PasswordInput? confirmPasswordInput,
   }) {
-    return RegisterInitial(
+    return LoginInitial(
       emailInput: emailInput ?? this.emailInput,
       passwordInput: passwordInput ?? this.passwordInput,
-      confirmPasswordInput: confirmPasswordInput ?? this.confirmPasswordInput,
     );
   }
 
@@ -49,27 +42,23 @@ class RegisterInitial extends RegisterState {
   List<Object> get props => [
         emailInput.value,
         passwordInput.value,
-        confirmPasswordInput.value,
       ];
 }
 
-class RegisterInProgress extends RegisterState {
-  const RegisterInProgress({
+class LoginInProgress extends LoginState {
+  const LoginInProgress({
     required super.emailInput,
     required super.passwordInput,
-    required super.confirmPasswordInput,
   });
 
   @override
-  RegisterInProgress copyWith({
+  LoginInProgress copyWith({
     EmailInput? emailInput,
     PasswordInput? passwordInput,
-    PasswordInput? confirmPasswordInput,
   }) {
-    return RegisterInProgress(
+    return LoginInProgress(
       emailInput: emailInput ?? this.emailInput,
       passwordInput: passwordInput ?? this.passwordInput,
-      confirmPasswordInput: confirmPasswordInput ?? this.confirmPasswordInput,
     );
   }
 
@@ -77,27 +66,23 @@ class RegisterInProgress extends RegisterState {
   List<Object> get props => [
         emailInput.value,
         passwordInput.value,
-        confirmPasswordInput.value,
       ];
 }
 
-class RegisterSuccess extends RegisterState {
-  const RegisterSuccess({
+class LoginSuccess extends LoginState {
+  const LoginSuccess({
     required super.emailInput,
     required super.passwordInput,
-    required super.confirmPasswordInput,
   });
 
   @override
-  RegisterSuccess copyWith({
+  LoginSuccess copyWith({
     EmailInput? emailInput,
     PasswordInput? passwordInput,
-    PasswordInput? confirmPasswordInput,
   }) {
-    return RegisterSuccess(
+    return LoginSuccess(
       emailInput: emailInput ?? this.emailInput,
       passwordInput: passwordInput ?? this.passwordInput,
-      confirmPasswordInput: confirmPasswordInput ?? this.confirmPasswordInput,
     );
   }
 
@@ -105,32 +90,28 @@ class RegisterSuccess extends RegisterState {
   List<Object> get props => [
         emailInput.value,
         passwordInput.value,
-        confirmPasswordInput.value,
       ];
 }
 
-class RegisterFailure extends RegisterState {
+class LoginFailure extends LoginState {
   final Object error;
 
-  const RegisterFailure({
+  const LoginFailure({
     required this.error,
     required super.emailInput,
     required super.passwordInput,
-    required super.confirmPasswordInput,
   });
 
   @override
-  RegisterFailure copyWith({
+  LoginFailure copyWith({
     Object? error,
     EmailInput? emailInput,
     PasswordInput? passwordInput,
-    PasswordInput? confirmPasswordInput,
   }) {
-    return RegisterFailure(
+    return LoginFailure(
       error: error ?? this.error,
       emailInput: emailInput ?? this.emailInput,
       passwordInput: passwordInput ?? this.passwordInput,
-      confirmPasswordInput: confirmPasswordInput ?? this.confirmPasswordInput,
     );
   }
 
@@ -139,6 +120,5 @@ class RegisterFailure extends RegisterState {
         error,
         emailInput.value,
         passwordInput.value,
-        confirmPasswordInput.value,
       ];
 }

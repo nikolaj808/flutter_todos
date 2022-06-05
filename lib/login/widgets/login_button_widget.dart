@@ -1,35 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todos/constants/spacing.dart';
-import 'package:flutter_todos/register/bloc/register_bloc.dart';
+import 'package:flutter_todos/login/bloc/login_bloc.dart';
 
-class RegisterButton extends StatelessWidget {
-  final void Function(BuildContext context) onRegisterPressed;
+class LoginButton extends StatelessWidget {
+  final void Function(BuildContext context) onLoginPressed;
 
-  const RegisterButton({
+  const LoginButton({
     Key? key,
-    required this.onRegisterPressed,
+    required this.onLoginPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RegisterBloc, RegisterState>(
+    return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
         return ElevatedButton(
-          onPressed: state is RegisterInProgress
-              ? () {}
-              : () => onRegisterPressed(context),
+          onPressed:
+              state is LoginInProgress ? () {} : () => onLoginPressed(context),
           style: ElevatedButton.styleFrom(
             minimumSize: const Size.fromHeight(kSpacingExtraLarge),
           ),
           child: Builder(builder: (context) {
-            if (state is RegisterInProgress) {
+            if (state is LoginInProgress) {
               return CircularProgressIndicator(
                 color: Theme.of(context).colorScheme.onPrimary,
               );
             }
 
-            return const Text('Register');
+            return const Text('Sign In');
           }),
         );
       },

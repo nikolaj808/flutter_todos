@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todos/constants/spacing.dart';
 import 'package:flutter_todos/register/bloc/register_bloc.dart';
 import 'package:flutter_todos/register/widgets/register_button_widget.dart';
 import 'package:flutter_todos/register/widgets/register_form_widget.dart';
@@ -91,7 +92,7 @@ class RegisterView extends StatelessWidget {
             title: const Text('Register'),
           ),
           body: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(kSpacingMedium),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

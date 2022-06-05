@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todos/blocs/user/user_bloc.dart';
 import 'package:flutter_todos/firebase_options.dart';
 import 'package:flutter_todos/repositories/authentication_repository.dart';
 import 'package:flutter_todos/splash/splash_page.dart';
@@ -25,11 +26,22 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => AuthenticationRepository(),
-      child: const MaterialApp(
-        title: 'Flutter Todos',
-        home: SplashPage(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => UserBloc()..add(const UserAppInitialized()),
+        ),
+      ],
+      child: MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider(
+            create: (context) => AuthenticationRepository(),
+          ),
+        ],
+        child: const MaterialApp(
+          title: 'Flutter Todos',
+          home: SplashPage(),
+        ),
       ),
     );
   }
