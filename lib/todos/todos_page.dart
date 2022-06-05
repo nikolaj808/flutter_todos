@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todos/blocs/user/user_bloc.dart';
+import 'package:flutter_todos/constants/spacing.dart';
 import 'package:flutter_todos/login/login_page.dart';
 
 class TodosPage extends StatelessWidget {
@@ -20,55 +23,59 @@ class TodosPage extends StatelessWidget {
 class TodosView extends StatelessWidget {
   const TodosView({Key? key}) : super(key: key);
 
+  void onSignOutPressed(BuildContext context) {
+    FirebaseAuth.instance.signOut();
+
+    Navigator.of(context).pushAndRemoveUntil(
+      LoginPage.route(),
+      (route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Todos'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      drawer: Drawer(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            StreamBuilder<User?>(
-              stream: FirebaseAuth.instance.authStateChanges(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.hasData) {
-                  final user = snapshot.data as User?;
-
-                  if (user == null) {
-                    return const ListTile(
-                      title: Text('User'),
-                      subtitle: Text('User is null'),
-                    );
-                  }
-
-                  return ListTile(
-                    title: const Text('User'),
-                    subtitle: Text(user.email ?? ''),
+            BlocBuilder<UserBloc, UserState>(
+              builder: (context, state) {
+                if (state is UserAuthenticated) {
+                  return UserAccountsDrawerHeader(
+                    accountName: Text(state.user.email ?? ''),
+                    accountEmail: const SizedBox.shrink(),
+                    currentAccountPicture: const CircleAvatar(
+                      child: Icon(Icons.person, size: 32),
+                    ),
                   );
                 }
 
-                return const CircularProgressIndicator();
+                return const SizedBox.shrink();
               },
             ),
             ElevatedButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-
-                Navigator.of(context).pushAndRemoveUntil(
-                  LoginPage.route(),
-                  (route) => false,
-                );
-              },
+              onPressed: () => onSignOutPressed(context),
               style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all<Size>(
+                  const Size.fromHeight(kSpacingExtraLarge),
+                ),
+                elevation: MaterialStateProperty.all<double>(0.0),
+                shape: MaterialStateProperty.all<OutlinedBorder>(
+                  const RoundedRectangleBorder(),
+                ),
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
               ),
               child: const Text('Sign Out'),
             ),
           ],
         ),
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(kSpacingMedium),
       ),
     );
   }
