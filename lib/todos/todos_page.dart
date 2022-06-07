@@ -1,9 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_todos/blocs/user/user_bloc.dart';
 import 'package:flutter_todos/constants/spacing.dart';
-import 'package:flutter_todos/login/login_page.dart';
 import 'package:flutter_todos/widgets/user_drawer_widget.dart';
 
 class TodosPage extends StatelessWidget {
