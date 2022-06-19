@@ -84,21 +84,23 @@ class LoginView extends StatelessWidget {
           appBar: AppBar(
             title: const Text('Login'),
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(kSpacingMedium),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const LoginHeader(),
-                LoginForm(formKey: _formKey, onLoginPressed: onLoginPressed),
-                Column(
-                  children: [
-                    const LoginRegisterOption(),
-                    const HeightSpacing.md(),
-                    LoginButton(onLoginPressed: onLoginPressed),
-                  ],
-                ),
-              ],
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(kSpacingMedium),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const LoginHeader(),
+                  LoginForm(formKey: _formKey, onLoginPressed: onLoginPressed),
+                  Column(
+                    children: [
+                      const LoginRegisterOption(),
+                      const HeightSpacing.md(),
+                      LoginButton(onLoginPressed: onLoginPressed),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

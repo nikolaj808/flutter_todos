@@ -91,18 +91,20 @@ class RegisterView extends StatelessWidget {
           appBar: AppBar(
             title: const Text('Register'),
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(kSpacingMedium),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const RegisterHeader(),
-                RegisterForm(
-                  formKey: _formKey,
-                  onRegisterPressed: onRegisterPressed,
-                ),
-                RegisterButton(onRegisterPressed: onRegisterPressed),
-              ],
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(kSpacingMedium),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const RegisterHeader(),
+                  RegisterForm(
+                    formKey: _formKey,
+                    onRegisterPressed: onRegisterPressed,
+                  ),
+                  RegisterButton(onRegisterPressed: onRegisterPressed),
+                ],
+              ),
             ),
           ),
         ),

@@ -7,6 +7,7 @@ class RegisterHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       'Let\'s get you registered.',
+      textAlign: TextAlign.center,
       style: Theme.of(context).textTheme.headline4,
     );
   }

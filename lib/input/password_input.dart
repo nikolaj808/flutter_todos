@@ -6,10 +6,8 @@ enum PasswordInputError {
   @override
   String toString() {
     switch (this) {
-      case empty:
+      case PasswordInputError.empty:
         return 'Password field cannot be empty';
-      default:
-        return '';
     }
   }
 }
