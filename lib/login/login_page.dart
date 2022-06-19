@@ -57,6 +57,8 @@ class LoginView extends StatelessWidget {
   }
 
   void onLoginPressed(BuildContext context) {
+    FocusScope.of(context).unfocus();
+
     if (!_formKey.currentState!.validate()) {
       return;
     }

@@ -62,6 +62,8 @@ class RegisterView extends StatelessWidget {
   }
 
   void onRegisterPressed(BuildContext context) {
+    FocusScope.of(context).unfocus();
+
     if (!_formKey.currentState!.validate()) {
       return;
     }

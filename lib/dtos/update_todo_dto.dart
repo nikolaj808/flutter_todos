@@ -1,12 +1,14 @@
 import 'package:equatable/equatable.dart';
 
-class CreateTodo extends Equatable {
+class UpdateTodo extends Equatable {
+  final String id;
   final String title;
   final bool completed;
 
-  const CreateTodo({
+  const UpdateTodo({
+    required this.id,
     required this.title,
-    this.completed = false,
+    required this.completed,
   });
 
   Map<String, dynamic> toFirestore() {
@@ -17,5 +19,5 @@ class CreateTodo extends Equatable {
   }
 
   @override
-  List<Object> get props => [title, completed];
+  List<Object> get props => [id, title, completed];
 }
