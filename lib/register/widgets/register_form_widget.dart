@@ -10,10 +10,10 @@ class RegisterForm extends StatelessWidget {
   final void Function(BuildContext context) onRegisterPressed;
 
   const RegisterForm({
-    Key? key,
+    super.key,
     required this.formKey,
     required this.onRegisterPressed,
-  }) : super(key: key);
+  });
 
   void onEmailChanged(BuildContext context, String email) {
     context.read<RegisterBloc>().add(

@@ -12,13 +12,19 @@ import 'package:flutter_todos/utilities/snack_bar_helper.dart';
 import 'package:flutter_todos/widgets/height_spacing_widget.dart';
 
 class LoginPage extends StatelessWidget {
-  static Route route() {
+  static Route route({
+    Key? key,
+  }) {
     return MaterialPageRoute<void>(
-      builder: (context) => const LoginPage(),
+      builder: (context) => LoginPage(
+        key: key,
+      ),
     );
   }
 
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +40,9 @@ class LoginPage extends StatelessWidget {
 class LoginView extends StatelessWidget {
   late final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  LoginView({Key? key}) : super(key: key);
+  LoginView({
+    super.key,
+  });
 
   void onLoginSuccess(BuildContext context) {
     Navigator.of(context).pushReplacement(TodosPage.route());

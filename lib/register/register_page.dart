@@ -10,13 +10,17 @@ import 'package:flutter_todos/todos/todos_page.dart';
 import 'package:flutter_todos/utilities/snack_bar_helper.dart';
 
 class RegisterPage extends StatelessWidget {
-  static Route route() {
+  static Route route({
+    Key? key,
+  }) {
     return MaterialPageRoute<void>(
-      builder: (context) => const RegisterPage(),
+      builder: (context) => RegisterPage(
+        key: key,
+      ),
     );
   }
 
-  const RegisterPage({Key? key}) : super(key: key);
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +36,9 @@ class RegisterPage extends StatelessWidget {
 class RegisterView extends StatelessWidget {
   late final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  RegisterView({Key? key}) : super(key: key);
+  RegisterView({
+    super.key,
+  });
 
   void onRegisterSuccess(BuildContext context) {
     SnackBarHelper.showSnackBar(

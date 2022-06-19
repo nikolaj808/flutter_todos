@@ -6,41 +6,49 @@ class HeightSpacing extends StatelessWidget {
 
   /// HeightSpacing widget with a custom height
   const HeightSpacing({
-    Key? key,
+    super.key,
     required this.height,
-  }) : super(key: key);
+  });
 
-  const HeightSpacing.xs({Key? key})
-      : height = kSpacingExtraSmall,
-        super(key: key);
+  /// HeightSpacing.xs: 4.0
+  const HeightSpacing.xs({
+    super.key,
+  }) : height = kSpacingExtraSmall;
 
-  const HeightSpacing.sm({Key? key})
-      : height = kSpacingSmall,
-        super(key: key);
+  /// HeightSpacing.xs: 8.0
+  const HeightSpacing.sm({
+    super.key,
+  }) : height = kSpacingSmall;
 
-  const HeightSpacing.md({Key? key})
-      : height = kSpacingMedium,
-        super(key: key);
+  /// HeightSpacing.xs: 16.0
+  const HeightSpacing.md({
+    super.key,
+  }) : height = kSpacingMedium;
 
-  const HeightSpacing.lg({Key? key})
-      : height = kSpacingLarge,
-        super(key: key);
+  /// HeightSpacing.xs: 32.0
+  const HeightSpacing.lg({
+    super.key,
+  }) : height = kSpacingLarge;
 
-  const HeightSpacing.xl({Key? key})
-      : height = kSpacingExtraLarge,
-        super(key: key);
+  /// HeightSpacing.xs: 48.0
+  const HeightSpacing.xl({
+    super.key,
+  }) : height = kSpacingExtraLarge;
 
-  const HeightSpacing.xxl({Key? key})
-      : height = kSpacingExtraExtraLarge,
-        super(key: key);
+  /// HeightSpacing.xs: 64.0
+  const HeightSpacing.xxl({
+    super.key,
+  }) : height = kSpacingExtraExtraLarge;
 
-  const HeightSpacing.xxxl({Key? key})
-      : height = kSpacingExtraExtraExtraLarge,
-        super(key: key);
+  /// HeightSpacing.xs: 96.0
+  const HeightSpacing.xxxl({
+    super.key,
+  }) : height = kSpacingExtraExtraExtraLarge;
 
-  const HeightSpacing.xxxxl({Key? key})
-      : height = kSpacingExtraExtraExtraExtraLarge,
-        super(key: key);
+  /// HeightSpacing.xs: 128.0
+  const HeightSpacing.xxxxl({
+    super.key,
+  }) : height = kSpacingExtraExtraExtraExtraLarge;
 
   @override
   Widget build(BuildContext context) {

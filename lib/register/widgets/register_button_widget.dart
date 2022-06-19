@@ -7,9 +7,9 @@ class RegisterButton extends StatelessWidget {
   final void Function(BuildContext context) onRegisterPressed;
 
   const RegisterButton({
-    Key? key,
+    super.key,
     required this.onRegisterPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todos/register/register_page.dart';
 
 class LoginRegisterOption extends StatelessWidget {
-  const LoginRegisterOption({Key? key}) : super(key: key);
+  const LoginRegisterOption({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

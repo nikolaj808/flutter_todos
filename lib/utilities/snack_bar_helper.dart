@@ -18,7 +18,10 @@ enum SnackBarType {
 }
 
 class SnackBarHelper {
+  const SnackBarHelper();
+
   static showSnackBar({
+    Key? key,
     required BuildContext context,
     required String message,
     SnackBarBehavior behavior = SnackBarBehavior.floating,
@@ -31,6 +34,7 @@ class SnackBarHelper {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
+        key: key,
         content: Text(message),
         behavior: behavior,
         backgroundColor: snackBarType.color,

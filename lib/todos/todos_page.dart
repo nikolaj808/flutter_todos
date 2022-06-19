@@ -3,13 +3,19 @@ import 'package:flutter_todos/constants/spacing.dart';
 import 'package:flutter_todos/widgets/user_drawer_widget.dart';
 
 class TodosPage extends StatelessWidget {
-  static Route route() {
+  static Route route({
+    Key? key,
+  }) {
     return MaterialPageRoute<void>(
-      builder: (context) => const TodosPage(),
+      builder: (context) => TodosPage(
+        key: key,
+      ),
     );
   }
 
-  const TodosPage({Key? key}) : super(key: key);
+  const TodosPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +24,9 @@ class TodosPage extends StatelessWidget {
 }
 
 class TodosView extends StatelessWidget {
-  const TodosView({Key? key}) : super(key: key);
+  const TodosView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

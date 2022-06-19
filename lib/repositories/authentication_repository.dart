@@ -5,6 +5,8 @@ import 'package:flutter_todos/exceptions/weak_password_error.dart';
 import 'package:flutter_todos/exceptions/wrong_password_error.dart';
 
 class AuthenticationRepository {
+  const AuthenticationRepository();
+
   Future<UserCredential> registerUserWithEmailAndPassword(
     String email,
     String password,

@@ -6,41 +6,49 @@ class WidthSpacing extends StatelessWidget {
 
   /// WidthSpacing widget with a custom width
   const WidthSpacing({
-    Key? key,
+    super.key,
     required this.width,
-  }) : super(key: key);
+  });
 
-  const WidthSpacing.xs({Key? key})
-      : width = kSpacingExtraSmall,
-        super(key: key);
+  /// WidthSpacing.xs: 4.0
+  const WidthSpacing.xs({
+    super.key,
+  }) : width = kSpacingExtraSmall;
 
-  const WidthSpacing.sm({Key? key})
-      : width = kSpacingSmall,
-        super(key: key);
+  /// WidthSpacing.sm: 8.0
+  const WidthSpacing.sm({
+    super.key,
+  }) : width = kSpacingSmall;
 
-  const WidthSpacing.md({Key? key})
-      : width = kSpacingMedium,
-        super(key: key);
+  /// WidthSpacing.md: 16.0
+  const WidthSpacing.md({
+    super.key,
+  }) : width = kSpacingMedium;
 
-  const WidthSpacing.lg({Key? key})
-      : width = kSpacingLarge,
-        super(key: key);
+  /// WidthSpacing.lg: 32.0
+  const WidthSpacing.lg({
+    super.key,
+  }) : width = kSpacingLarge;
 
-  const WidthSpacing.xl({Key? key})
-      : width = kSpacingExtraLarge,
-        super(key: key);
+  /// WidthSpacing.xl: 48.0
+  const WidthSpacing.xl({
+    super.key,
+  }) : width = kSpacingExtraLarge;
 
-  const WidthSpacing.xxl({Key? key})
-      : width = kSpacingExtraExtraLarge,
-        super(key: key);
+  /// WidthSpacing.xxl: 64.0
+  const WidthSpacing.xxl({
+    super.key,
+  }) : width = kSpacingExtraExtraLarge;
 
-  const WidthSpacing.xxxl({Key? key})
-      : width = kSpacingExtraExtraExtraLarge,
-        super(key: key);
+  /// WidthSpacing.xxxl: 96.0
+  const WidthSpacing.xxxl({
+    super.key,
+  }) : width = kSpacingExtraExtraExtraLarge;
 
-  const WidthSpacing.xxxxl({Key? key})
-      : width = kSpacingExtraExtraExtraExtraLarge,
-        super(key: key);
+  /// WidthSpacing.xxxxl: 128.0
+  const WidthSpacing.xxxxl({
+    super.key,
+  }) : width = kSpacingExtraExtraExtraExtraLarge;
 
   @override
   Widget build(BuildContext context) {

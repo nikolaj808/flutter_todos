@@ -5,7 +5,9 @@ import 'package:flutter_todos/blocs/user/user_bloc.dart';
 import 'package:flutter_todos/login/login_page.dart';
 
 class UserDrawer extends StatelessWidget {
-  const UserDrawer({Key? key}) : super(key: key);
+  const UserDrawer({
+    super.key,
+  });
 
   void onSignOutPressed(BuildContext context) {
     FirebaseAuth.instance.signOut();

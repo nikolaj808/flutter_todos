@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todos/blocs/user/user_bloc.dart';
 import 'package:flutter_todos/firebase_options.dart';
 import 'package:flutter_todos/repositories/authentication_repository.dart';
+import 'package:flutter_todos/repositories/todos_repository.dart';
 import 'package:flutter_todos/splash/splash_page.dart';
 
 void main() async {
@@ -15,14 +16,30 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  const AuthenticationRepository authenticationRepository =
+      AuthenticationRepository();
+  const TodosRepository todosRepository = TodosRepository();
+
   BlocOverrides.runZoned(
-    () => runApp(const App()),
+    () => runApp(
+      const App(
+        authenticationRepository: authenticationRepository,
+        todosRepository: todosRepository,
+      ),
+    ),
     blocObserver: FlutterTodosObserver(),
   );
 }
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  final AuthenticationRepository authenticationRepository;
+  final TodosRepository todosRepository;
+
+  const App({
+    super.key,
+    required this.authenticationRepository,
+    required this.todosRepository,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +51,11 @@ class App extends StatelessWidget {
       ],
       child: MultiRepositoryProvider(
         providers: [
-          RepositoryProvider(
-            create: (context) => AuthenticationRepository(),
+          RepositoryProvider.value(
+            value: authenticationRepository,
+          ),
+          RepositoryProvider.value(
+            value: todosRepository,
           ),
         ],
         child: const MaterialApp(

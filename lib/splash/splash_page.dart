@@ -5,7 +5,19 @@ import 'package:flutter_todos/login/login_page.dart';
 import 'package:flutter_todos/todos/todos_page.dart';
 
 class SplashPage extends StatelessWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  static Route route({
+    Key? key,
+  }) {
+    return MaterialPageRoute<void>(
+      builder: (context) => SplashPage(
+        key: key,
+      ),
+    );
+  }
+
+  const SplashPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +26,9 @@ class SplashPage extends StatelessWidget {
 }
 
 class SplashView extends StatelessWidget {
-  const SplashView({Key? key}) : super(key: key);
+  const SplashView({
+    super.key,
+  });
 
   void onUserAuthenticated(BuildContext context) {
     Navigator.of(context).pushReplacement(TodosPage.route());

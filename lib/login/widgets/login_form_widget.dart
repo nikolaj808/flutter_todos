@@ -10,10 +10,10 @@ class LoginForm extends StatelessWidget {
   final void Function(BuildContext context) onLoginPressed;
 
   const LoginForm({
-    Key? key,
+    super.key,
     required this.formKey,
     required this.onLoginPressed,
-  }) : super(key: key);
+  });
 
   void onEmailChanged(BuildContext context, String email) {
     context.read<LoginBloc>().add(
